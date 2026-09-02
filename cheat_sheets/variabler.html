@@ -7,9 +7,17 @@
 </head>
 <body>
 
-<h1>Variabler i JavaScript</h1>
+    <h1>Variabler i JavaScript</h1>
 
-<p>Hei, <span id="name"></span>( <span id="age">?</span> år)</p>
+    <p>Hei, <span id="name"></span>( <span id="age">?</span> år)</p>
+
+    <h2>Handlekurv</h2>
+    <ul>
+        <li>Antall produkter: <span id="quantitySpan">0</span></li>
+        <li>Pris: <span id="price">0</span> kroner</li>
+        <li>Sum: <span id="total">0</span> kroner</li>
+    </ul>
+
     
 <script>
     // DEKLARERE VARIABLER
@@ -29,6 +37,21 @@
    const birthYear = 1989;
    let age = 2026 - birthYear;
    document.getElementById("age").innerHTML = age;
+
+   //FORBEREDER HANDLEKURV
+   // 3 variabler produkt, pris, SUM
+
+   let antallProdukt = 3
+   const pris = 17000
+   let sum = pris * antallProdukt
+
+
+
+   document.getElementById("quantitySpan").innerHTML = antallProdukt;
+   document.getElementById("price").innerHTML = pris;
+   document.getElementById("total").innerHTML = sum;
+
+
 </script>
 </body>
 </html>
