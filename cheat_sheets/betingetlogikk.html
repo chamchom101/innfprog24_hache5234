@@ -13,6 +13,10 @@
         const password = "passord123"
         let loggedIn = false
 
+        if (loggedIn) {
+
+        }
+
         //IF-test som sjekker om innsendt brukernavn matcher systemet:
         if(username === "hassan") {
             console.log("Brukernavn er riktig")
@@ -25,10 +29,9 @@
             loggedIn = true
             console.log(`${loggedIn} Logget inn som ${username}`)
             document.getElementById("loginStatus").innerHTML = username;
-        } else {
-            loggedIn = false
-            document.getElementById("loginStatus").innerHTML = "Ikke logget inn";
-        }
+        } 
+            
+        
     </script>
 </body>
 </html>
