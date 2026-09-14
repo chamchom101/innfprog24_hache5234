@@ -33,7 +33,6 @@
     <script>
 
         //Array med bok med en forfatter
-
         const book1 = [
             "Fourth wing",
             "Rebecka Yaris",
@@ -41,7 +40,6 @@
         ]
 
         //Array med bok med flere forfattere
-
         const bok2 = [
             "Silver eyes",
             "Scott Cawthoe",
@@ -50,7 +48,6 @@
         ]
 
         //Object med bok
-
         const bok3 = {
 
             title: "Harry potter",
@@ -59,10 +56,20 @@
         }
 
         //Print infor fra book1 til html
-
         document.getElementById("book1TitleSpan").innerHTML = book1[0]
         document.getElementById("book1AuthorSpan").innerHTML = book1[1]
-        document.getElementById("book1PageCountSpan").innerHTML = book[2]
+        document.getElementById("book1PageCountSpan").innerHTML = book1[2]
+
+        //Print infor fra book2 til HTML
+        document.getElementById("book2TitleSpan").innerHTML = bok2[0]
+        document.getElementById("book2AuthorSpan").innerHTML = bok2[1] + ", " + bok2[2]
+        document.getElementById("book2PageCountSpan").innerHTML = bok2[3]
+
+        //Print info fra book3 til HTML
+        //Book3 er et objekt , vi må derfor referere til nøkler i stedet for indexer
+        document.getElementById("book3TitleSpan").innerHTML = bok3.title
+        document.getElementById("book3AuthorSpan").innerHTML = bok3.author
+        document.getElementById("book3PageCountSpan").innerHTML = bok3.pagecount
 
     </script>
     
