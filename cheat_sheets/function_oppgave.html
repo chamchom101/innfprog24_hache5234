@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions, oppgave 1</title>
+</head>
+<body>
+    
+    <script>
+        const people = ["Marius", "Tore", "Susanne", "Monica", "Arne", "Zoltan", "Beate"]
+
+        function printList(liste) {
+
+            const arrayName = liste.sort()
+
+            const createP = document.createElement("p")
+            createP.innerHTML = arrayName.join(", ")
+            document.body.appendChild(createP)
+
+
+        }
+
+        //printList(people)
+
+
+        function listArray(array) {
+             
+            array.sort()
+
+            //lage en ny ul tag 
+            const ulElement = document.createElement("ul")
+
+
+            let arrayItems = []
+            array.map(a => { arrayItems += 
+                `<li>${a}</li>`
+            })
+
+         ulElement.innerHTML = arrayItems
+         document.body.appendChild(ulElement)
+
+            
+
+        }
+       
+        listArray(people)
+
+    </script>
+</body>
+</html>
