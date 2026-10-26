@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksamensnotater - Innføring i programmering (4 A4-sider)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 8.2pt;
+            line-height: 1.2;
+            color: #000;
+            background: #ddd;
+        }
+        .no-print {
+            background: #222;
+            color: #fff;
+            padding: 8px 16px;
+            text-align: center;
+            font-size: 10pt;
+        }
+        .no-print button {
+            margin-left: 12px;
+            padding: 4px 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 6mm 7mm;
+            margin: 8mm auto;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+            break-after: page;
+        }
+        .page:last-child {
+            page-break-after: auto;
+            break-after: auto;
+        }
+        .page-header {
+            border-bottom: 1.5px solid #000;
+            padding-bottom: 2px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 6px;
+            flex: 1;
+            align-content: start;
+        }
+        .box {
+            border: 1px solid #000;
+            padding: 3px 5px;
+            break-inside: avoid;
+        }
+        .box.full {
+            grid-column: 1 / -1;
+        }
+        h2 {
+            font-size: 8.6pt;
+            text-transform: uppercase;
+            background: #eee;
+            border-bottom: 1px solid #000;
+            margin: -3px -5px 3px -5px;
+            padding: 1.5px 5px;
+        }
+        h3 {
+            font-size: 8.1pt;
+            margin-top: 2.5px;
+            margin-bottom: 1px;
+            text-decoration: underline;
+        }
+        p, li {
+            margin-bottom: 1.5px;
+        }
+        ul {
+            padding-left: 12px;
+        }
+        pre {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 7.5pt;
+            line-height: 1.14;
+            background: #f7f7f7;
+            border-left: 2px solid #444;
+            padding: 2px 4px;
+            margin: 2px 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        code {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 7.7pt;
+            background: #f0f0f0;
+            padding: 0 2px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2px 0;
+            font-size: 7.7pt;
+        }
+        th, td {
+            border: 1px solid #666;
+            padding: 1px 3px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #eee;
+        }
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        @media print {
+            body {
+                background: #fff;
+            }
+            .no-print {
+                display: none;
+            }
+            .page {
+                margin: 0;
+                width: 210mm;
+                height: 297mm;
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="no-print">
+    <strong>Eksamensnotater: 2 A4-ark = 4 sider</strong> – Trykk <code>Cmd + P</code> (eller knappen) og velg "Lagre som PDF" / skriv ut tosidig (Marginer: Ingen / Standard).
+    <button onclick="window.print()">Skriv ut / Lagre som PDF</button>
+</div>
+
+<!-- ==================== SIDE 1 ==================== -->
+<div class="page">
+    <div class="page-header">
+        <span>SIDE 1 / 4 — VARIABLER, DATATYPER, TEKST, MATH, BETINGET LOGIKK & DOM</span>
+        <span>Innføring i programmering (JS)</span>
+    </div>
+
+    <div class="grid">
+        <div class="box">
+            <h2>1. Variabler, HTML-kobling & Konsoll</h2>
+            <ul>
+                <li><code>const</code>: Konstant verdi som <strong>ikke skal byttes ut</strong> (f.eks. fødselsår, fast pris, selve referansen til en array eller et objekt).</li>
+                <li><code>let</code>: Variabel som <strong>kan endres</strong> senere i koden (f.eks. teller, sum, poeng, innloggingsstatus, en HTML-byggevariabel).</li>
+            </ul>
+            <pre>// Deklarere og tilordne verdi
+const firstName = "Hassan";
+const lastName = "Cherry";
+const birthYear = 1989;
+let age = 2026 - birthYear; // 37
+
+// Regne med variabler (handlekurv-eksempel)
+let antallProdukt = 3;
+const pris = 17000;
+let sum = pris * antallProdukt; // 51000</pre>
+            <h3>Koble JS til HTML & Feilsøking</h3>
+            <pre>&lt;!-- Plasser &lt;script&gt; rett før &lt;/body&gt; så HTML er lastet inn først --&gt;
+&lt;script&gt;
+    console.log("Sjekk variabel:", sum); // Åpne Inspect -&gt; Console
+    console.log(typeof age);             // "number"
+&lt;/script&gt;
+&lt;!-- Eller ekstern fil: &lt;script src="script.js" defer&gt;&lt;/script&gt; --&gt;</pre>
+        </div>
+
+        <div class="box">
+            <h2>2. Datatyper, Strenger & Typekonvertering</h2>
+            <table>
+                <tr><th>Type</th><th>Eksempel</th><th>Beskrivelse</th></tr>
+                <tr><td>String</td><td><code>"Hei"</code>, <code>'A'</code>, <code>`Mal`</code></td><td>Tekst (i anførselstegn/backticks)</td></tr>
+                <tr><td>Number</td><td><code>42</code>, <code>3.14</code>, <code>-5</code></td><td>Heltall og desimaltall (punktum!)</td></tr>
+                <tr><td>Boolean</td><td><code>true</code>, <code>false</code></td><td>Sann / usann (brukes i logikk)</td></tr>
+                <tr><td>Array</td><td><code>["A", "B", 10]</code></td><td>Liste med verdier (start-indeks 0)</td></tr>
+                <tr><td>Object</td><td><code>{ title: "Bok" }</code></td><td>Struktur med nøkkel: verdi</td></tr>
+                <tr><td>Undefined</td><td><code>undefined</code> / <code>NaN</code></td><td>Udefinert / Not a Number</td></tr>
+            </table>
+            <h3>Konkatinering (+) vs. Template Literals (` `)</h3>
+            <pre>const fullName = firstName + " " + lastName;
+const tekst = `Hei ${firstName} ${lastName}, du er ${age} år.`;</pre>
+            <h3>Nyttige String-metoder & Tallkonvertering</h3>
+            <pre>const s = "  Hei Verden  ";
+s.length;          // Antall tegn i teksten
+s.trim();          // "Hei Verden" (fjerner mellomrom foran/bak)
+s.toLowerCase();   // "  hei verden  " (små bokstaver - bra ved søk!)
+s.toUpperCase();   // "  HEI VERDEN  "
+s.includes("Hei"); // true (sjekker om deltekst finnes)
+
+// Konvertere tekst (f.eks. fra input-felt) til tall:
+const tall1 = Number("25.5");        // 25.5
+const tall2 = parseInt("25.9");      // 25 (kun heltall)
+const tall3 = parseFloat("25.9");    // 25.9
+const avrundet = (10 / 3).toFixed(2); // "3.33" (OBS: returnerer String)</pre>
+        </div>
+
+        <div class="box">
+            <h2>3. Matematiske Operatorer & Math-objektet</h2>
+            <table>
+                <tr><th>Op.</th><th>Betydning</th><th>Eksempel</th></tr>
+                <tr><td><code>+ - * /</code></td><td>Pluss, minus, gange, dele</td><td><code>10 / 2 // 5</code></td></tr>
+                <tr><td><code>%</code></td><td>Modulo (rest etter deling)</td><td><code>10 % 3 // 1</code> (<code>n % 2 === 0</code> &rarr; partall)</td></tr>
+                <tr><td><code>++</code> / <code>--</code></td><td>Øk med 1 / trekk fra 1</td><td><code>teller++</code> / <code>from--</code></td></tr>
+                <tr><td><code>+=</code> / <code>-=</code></td><td>Legg til / trekk fra variabel</td><td><code>sum += n</code> (samme som <code>sum = sum + n</code>)</td></tr>
+            </table>
+            <h3>Tilfeldige tall (Math.random) & Avrunding</h3>
+            <pre>Math.round(4.6); // 5 (vanlig avrunding: .5 rundes opp)
+Math.floor(4.9); // 4 (runder ALLTID ned til nærmeste heltall)
+Math.ceil(4.1);  // 5 (runder ALLTID opp til nærmeste heltall)
+Math.random();   // Tilfeldig desimaltall fra 0 til (ikke med) 1
+
+// Tilfeldig heltall fra 0 til 9:
+const nullTilNi = Math.floor(Math.random() * 10);
+
+// Tilfeldig heltall fra 1 til 6 (terningkast):
+const terning = Math.floor(Math.random() * 6) + 1;
+
+// Tilfeldig heltall mellom min og max (inkludert begge):
+function randomMinMax(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Hente et tilfeldig element fra en hvilken som helst array:
+const tilfeldigBok = books[Math.floor(Math.random() * books.length)];</pre>
+        </div>
+
+        <div class="box">
+            <h2>4. Betinget Logikk (If / Else / Ternary / Switch)</h2>
+            <table>
+                <tr><th>Op.</th><th>Sammenligning</th><th>Op.</th><th>Logisk operator</th></tr>
+                <tr><td><code>===</code></td><td>Lik verdi OG datatype</td><td><code>&amp;&amp;</code></td><td>OG (begge krav må være true)</td></tr>
+                <tr><td><code>!==</code></td><td>Ikke lik verdi/type</td><td><code>||</code></td><td>ELLER (minst ett krav er true)</td></tr>
+                <tr><td><code>&lt; &gt;</code></td><td>Mindre / større enn</td><td><code>!</code></td><td>IKKE (snur true &leftrightarrow; false)</td></tr>
+                <tr><td><code>&lt;= &gt;=</code></td><td>Mindre/større eller lik</td><td><code>? :</code></td><td>Ternary (kort if/else i uttrykk)</td></tr>
+            </table>
+            <pre>const username = "hassan";
+const password = "passord123";
+let loggedIn = false;
+
+if (username === "hassan" &amp;&amp; password === "passord123") {
+    loggedIn = true;
+    document.getElementById("loginStatus").innerHTML = username;
+} else if (username === "hassan") {
+    console.log("Riktig brukernavn, men feil passord");
+} else {
+    console.log("Feil brukernavn");
+}
+
+// Sjekke boolean direkte:
+if (loggedIn)  { console.log("Bruker er logget inn"); }
+if (!loggedIn) { console.log("Bruker er IKKE logget inn"); }
+
+// Ternary operator: betingelse ? verdiHvisTrue : verdiHvisFalse
+const tekstAntall = b.author.length === 1 ? "Forfatter" : "Forfattere";
+
+// Switch-case:
+switch (operator) {
+    case "add":      return num1 + num2;
+    case "subtract": return num1 - num2;
+    default:         return "Ukjent operator";
+}</pre>
+        </div>
+
+        <div class="box full">
+            <h2>5. Hente og Manipulere HTML-elementer (DOM)</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <div>
+                    <h3>1. Skrive til eksisterende element (innerHTML / textContent)</h3>
+                    <pre>&lt;!-- HTML --&gt;
+&lt;p&gt;Hei, &lt;span id="name"&gt;&lt;/span&gt; (&lt;span id="age"&gt;?&lt;/span&gt; år)&lt;/p&gt;
+&lt;ul id="books"&gt;&lt;/ul&gt;
+
+// JavaScript:
+// Erstatt innholdet i et element (=):
+document.getElementById("name").innerHTML = firstName + " " + lastName;
+document.getElementById("age").innerHTML = age;
+
+// Legg til på slutten av eksisterende innhold (+=):
+document.getElementById("books").innerHTML += `&lt;li&gt;Ny bok&lt;/li&gt;`;
+
+// Alternativ til getElementById (bruker CSS-selektor):
+document.querySelector("#name").innerHTML = "Hassan";
+document.querySelector(".min-klasse").style.color = "red";</pre>
+                </div>
+                <div>
+                    <h3>2. Opprette nye HTML-elementer i JS (createElement)</h3>
+                    <pre>// Funksjon som lager et HTML-element og legger det på nettsiden:
+function printElementName(name = "Hassan", htmltag = "h2") {
+    // 1. Opprett elementet
+    const element = document.createElement(htmltag);
+    // 2. Fyll med tekst/HTML (og evt. klasser/attributter)
+    element.innerHTML = name;
+    element.classList.add("overskrift");
+    // 3. Legg elementet inn i dokumentet (eller i en annen forelder-tag)
+    document.body.appendChild(element);
+}
+printElementName();               // Lager &lt;h2&gt;Hassan&lt;/h2&gt;
+printElementName("Cherry", "h1"); // Lager &lt;h1&gt;Cherry&lt;/h1&gt;</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SIDE 2 ==================== -->
+<div class="page">
+    <div class="page-header">
+        <span>SIDE 2 / 4 — ARRAYS, ARRAY-METODER, OBJEKTER & MULTIDIMENSJONALE ARRAYS</span>
+        <span>Innføring i programmering (JS)</span>
+    </div>
+
+    <div class="grid">
+        <div class="box">
+            <h2>6. Arrays (Lister) — Grunnleggende & Endring</h2>
+            <p>En array holder flere verdier i en bestemt rekkefølge. <strong>Indeks starter på 0!</strong></p>
+            <pre>const books = ["Silver Eyes", "Harry Potter", "Fourth Wing"];
+
+books[0];                  // "Silver Eyes" (første element)
+books[1] = "Ny tittel";    // Endrer elementet på indeks 1
+books.length;              // 3 (antall elementer i arrayen)
+books[books.length - 1];   // Henter alltid SISTE element</pre>
+
+            <h3>Metoder for å legge til og slette elementer</h3>
+            <table>
+                <tr><th>Metode</th><th>Forklaring</th></tr>
+                <tr><td><code>.push(verdi)</code></td><td>Legger inn element <strong>bakerst</strong> i arrayen</td></tr>
+                <tr><td><code>.unshift(verdi)</code></td><td>Legger inn element <strong>foran</strong> (indeks 0, forskyver resten)</td></tr>
+                <tr><td><code>.pop()</code></td><td>Fjerner og returnerer <strong>siste</strong> element</td></tr>
+                <tr><td><code>.shift()</code></td><td>Fjerner og returnerer <strong>første</strong> element</td></tr>
+                <tr><td><code>.splice(idx, slett, ny)</code></td><td>Start på <code>idx</code>, slett <code>slett</code> antall, sett evt. inn <code>ny</code></td></tr>
+            </table>
+            <pre>// Legge til på slutten og starten:
+books.push("Fellowship of the Ring");
+books.unshift("LOTR: Two Towers");
+
+// .splice(startIndex, antallSomSkalSlettes, ...nyeElementer):
+books.splice(5, 0, "LOTR: Return of the King"); // Setter inn på idx 5
+books.splice(4, 1);                             // Sletter 1 stk på idx 4</pre>
+        </div>
+
+        <div class="box">
+            <h2>7. Søke, Konvertere og Sortere Arrays</h2>
+            <h3>Finne indeks og sjekke om verdi eksisterer</h3>
+            <pre>// .indexOf(element): Returnerer første indeks som matcher, eller -1
+const indexFound = books.indexOf("LOTR: Return of the King");
+if (indexFound !== -1) {
+    books.splice(indexFound, 1); // Sletter kun hvis elementet finnes!
+}
+
+// .includes(element): Returnerer true eller false
+const bookExists = books.includes("Fourth Wing"); // true</pre>
+
+            <h3>Skrive ut hel array som tekststreng</h3>
+            <pre>books.toString();  // "Silver Eyes,Harry Potter,Fourth Wing" (uten mellomrom)
+books.join(", ");  // "Silver Eyes, Harry Potter, Fourth Wing" (valgfri separator)
+books.join(" - "); // "Silver Eyes - Harry Potter - Fourth Wing"</pre>
+
+            <h3>Sortering (Tekst vs. Tall!)</h3>
+            <pre>// Tekst-array (alfabetisk):
+books.sort();      // Sorterer A til Å
+books.reverse();   // Snur rekkefølgen (gir Å til A hvis .sort() ble kjørt først)
+
+// Tall-array (VIKTIG: vanlig .sort() sorterer tall alfabetisk: 111 før 15!):
+const tall = [99, 6, 34, 8, 111, 44, 6000, 15];
+tall.sort(function(a, b) { return a - b; }); // Stigende: 0 til 9
+tall.sort(function(a, b) { return b - a; }); // Synkende: 9 til 0
+// Kort syntaks: tall.sort((a, b) =&gt; a - b);</pre>
+        </div>
+
+        <div class="box">
+            <h2>8. Objekter (Key : Value)</h2>
+            <p>Et objekt beskriver én enhet (f.eks. én bok, én person, ett produkt) ved hjelp av <strong>nøkler (egenskaper)</strong> i stedet for tall-indekser.</p>
+            <pre>const bok3 = {
+    title: "Harry Potter",
+    author: "JK Rowling",
+    pagecount: 333
+};
+
+// Hente ut verdier med punktum-notasjon (eller klammeparentes):
+document.getElementById("book3TitleSpan").innerHTML = bok3.title;
+document.getElementById("book3AuthorSpan").innerHTML = bok3.author;
+document.getElementById("book3PageCountSpan").innerHTML = bok3["pagecount"];
+
+// Endre verdi og legge til ny egenskap på objektet:
+bok3.pagecount = 340;
+bok3.read = true;</pre>
+
+            <h3>Objekt som inneholder en Array</h3>
+            <pre>const bok = {
+    title: "Silver Eyes",
+    author: ["Scott Cawthon", "Kira Wrisley"],
+    pagecount: 365
+};
+bok.author[0];               // "Scott Cawthon"
+bok.author.push("Ny Forf."); // Legger til i arrayen inni objektet
+bok.author.join(", ");       // "Scott Cawthon, Kira Wrisley, Ny Forf."</pre>
+        </div>
+
+        <div class="box">
+            <h2>9. Array.map(), .filter() og .find()</h2>
+            <h3><code>.map()</code> — Gå gjennom hvert element i en array</h3>
+            <pre>const books = ["Fourth Wing", "Silver Eyes", "Harry Potter"];
+books.sort();
+
+// Metode 1: Bygg en HTML-streng i en let-variabel (BESTE PRAKSIS)
+let booksHTML = "";
+books.map(book =&gt; {
+    booksHTML += `&lt;li&gt;${book}&lt;/li&gt;`;
+});
+document.getElementById("booksHTML").innerHTML = booksHTML;
+
+// Med tilgang til indeks (plassnummer):
+books.map((book, index) =&gt; {
+    console.log(`Plass ${index}: ${book}`);
+});</pre>
+
+            <h3><code>.filter()</code> — Filtrere ut elementer til en ny array</h3>
+            <pre>// Beholder KUN elementer der betingelsen blir true:
+const langeBoker = bokregister.filter(b =&gt; b.pagecount &gt;= 400);
+const kunRowling = bokregister.filter(b =&gt; b.author.includes("JK Rowling"));
+
+// .find() — Returnerer kun det FØRSTE objektet som matcher (ikke en array):
+const spesifikkBok = bokregister.find(b =&gt; b.isbn === 9780349437019);</pre>
+        </div>
+
+        <div class="box full">
+            <h2>10. Multidimensjonal Array (Array med Objekter — Komplett Mønster fra Forelesning)</h2>
+            <pre>const bokregister = [
+    { title: "Fourth Wing", author: ["Rebecca Yarros"], pagecount: 512, isbn: 9780349437019 },
+    { title: "Silver Eyes", author: ["Scott Cawthon", "Kira Wrisley"], pagecount: 365, isbn: 9781338134377 },
+    { title: "Harry Potter: De vises sten", author: ["JK Rowling"], pagecount: 333, isbn: 9781408855652 }
+];
+
+// 1. Hente ut enkeltverdier direkte via indeks + nøkkel:
+document.getElementById("book3Title").innerHTML = bokregister[2].title;               // "Harry Potter: De vises sten"
+document.getElementById("book2Author2").innerHTML = bokregister[1].author.join(", "); // "Scott Cawthon, Kira Wrisley"
+
+// 2. Skrive ut ALLE bøker som HTML-kort ved hjelp av .map() og template literals:
+let booksHTML = "";
+bokregister.map(b =&gt; {
+    booksHTML += `
+        &lt;article&gt;
+            &lt;img src="https://covers.openlibrary.org/b/isbn/${b.isbn}-M.jpg" alt="${b.title}" /&gt;
+            &lt;h3&gt;${b.title}&lt;/h3&gt;
+            &lt;p class="isbnnumber"&gt;${b.isbn}&lt;/p&gt;
+            &lt;p&gt;${b.author.length === 1 ? "Forfatter" : "Forfattere"}: ${b.author.join(", ")}&lt;/p&gt;
+            &lt;p&gt;Sidetall: ${b.pagecount}&lt;/p&gt;
+        &lt;/article&gt;`;
+});
+document.getElementById("books").innerHTML = booksHTML;
+
+// 3. Filtrere ut bøker med minst 400 sider (.filter) og skrive dem ut (.map):
+let longreadHTML = "";
+const longReads = bokregister.filter(l =&gt; l.pagecount &gt;= 400);
+longReads.map(l =&gt; {
+    longreadHTML += `&lt;article&gt;&lt;h3&gt;${l.title}&lt;/h3&gt;&lt;p&gt;Sidetall: ${l.pagecount}&lt;/p&gt;&lt;/article&gt;`;
+});
+document.getElementById("longReads").innerHTML = longreadHTML;</pre>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SIDE 3 ==================== -->
+<div class="page">
+    <div class="page-header">
+        <span>SIDE 3 / 4 — FUNKSJONER, RETURN, REKURSJON, LØKKER & BRUKERINPUT</span>
+        <span>Innføring i programmering (JS)</span>
+    </div>
+
+    <div class="grid">
+        <div class="box">
+            <h2>11. Funksjoner, Parametere & Scope</h2>
+            <p>Funksjoner samler kode som skal utføre en oppgave, og kan kalles flere ganger.</p>
+            <pre>// 1. Funksjon uten parameter:
+function printName() {
+    document.getElementById("username").innerHTML = "Hassan";
+}
+printName();
+
+// 2. Funksjon med parameter (input-variabel til funksjonen):
+function printParameterName(name) {
+    document.getElementById("parameter-username").innerHTML = name;
+}
+printParameterName("Hassan");
+
+// 3. Funksjon med standardverdi (default parameter):
+function printDefaultName(name = "brukernavn") {
+    document.getElementById("full-parameter-username").innerHTML = name;
+}
+printDefaultName();         // Gir "brukernavn"
+printDefaultName("Hassan"); // Gir "Hassan"
+
+// 4. Pilfunksjon (Arrow function):
+const multiply = (a, b) =&gt; a * b;</pre>
+            <h3>Scope (Rekkevidde på variabler)</h3>
+            <ul>
+                <li><strong>Global:</strong> Deklarert utenfor funksjon &rarr; kan brukes i hele skriptet.</li>
+                <li><strong>Lokal:</strong> Deklarert med <code>let</code>/<code>const</code> inni en funksjon/blokk <code>{ }</code> &rarr; eksisterer kun inni den blokken.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>12. Return & Rekursive Funksjoner</h2>
+            <p><code>return</code> sender en verdi ut av funksjonen slik at svaret kan lagres i en variabel, og <strong>avslutter funksjonen umiddelbart</strong>.</p>
+            <pre>function calculator(number1, number2, operator) {
+    if (operator === "add")      return number1 + number2;
+    if (operator === "subtract") return number1 - number2;
+    if (operator === "multiply") return number1 * number2;
+    if (operator === "divide")   return number1 / number2;
+    return; // Avslutter funksjonen hvis operator mangler/er feil
+}
+
+// Lagre resultatet i en variabel og skriv ut med createElement:
+const result = calculator(2, 3, "add"); // 5
+const p = document.createElement("p");
+p.innerHTML = result;
+document.body.appendChild(p);</pre>
+
+            <h3>Rekursiv funksjon (funksjon som kaller seg selv)</h3>
+            <pre>function countdown(from) {
+    if (from &gt; 0) {
+        console.log(from); // 1. Gjør arbeidet
+        from--;            // 2. Endre verdien mot stoppbetingelsen
+        countdown(from);   // 3. Kall seg selv på nytt
+    } else {
+        return;            // 4. Stoppbetingelse (viktig for å unngå evig løkke!)
+    }
+}
+countdown(10);</pre>
+        </div>
+
+        <div class="box">
+            <h2>13. Løkker (For, While, For...of)</h2>
+            <p>Brukes til å gjenta kode eller iterere gjennom lister (alternativ til <code>.map()</code>).</p>
+            <pre>// 1. for-løkke: for (startverdi; betingelse; endring)
+for (let i = 0; i &lt; 5; i++) {
+    console.log("Runde:", i); // Skriver ut 0, 1, 2, 3, 4
+}
+
+// Gå gjennom en array med vanlig for-løkke:
+for (let i = 0; i &lt; books.length; i++) {
+    console.log(books[i]);
+}
+
+// Baklengs for-løkke (f.eks. nedtelling fra 10 til 1):
+for (let i = 10; i &gt; 0; i--) {
+    console.log(i);
+}
+
+// 2. for...of-løkke (går direkte gjennom hvert element i en array):
+for (const book of books) {
+    console.log(book);
+}
+
+// 3. while-løkke (kjører så lenge kravet er true):
+let forsok = 0;
+while (forsok &lt; 3) {
+    forsok++;
+}
+// break = hopp helt ut av løkka | continue = hopp til neste runde</pre>
+        </div>
+
+        <div class="box">
+            <h2>14. Brukerinput (Klikk, Skjema, Select & Live)</h2>
+            <h3>1. Klikk-hendelse (addEventListener "click" vs. onclick)</h3>
+            <pre>&lt;!-- Via HTML: &lt;button onclick="showMessage()"&gt;Klikk&lt;/button&gt; --&gt;
+&lt;input type="number" id="birthyear" /&gt;
+&lt;button id="callCalculate"&gt;Regn ut alder&lt;/button&gt;
+
+document.getElementById("callCalculate").addEventListener("click", function(e) {
+    const birthyear = Number(document.getElementById("birthyear").value);
+    const age = 2026 - birthyear;
+    alert(`Du er ${age} år hvis du er født i ${birthyear}`);
+});</pre>
+
+            <h3>2. Skjema (submit) — HUSK event.preventDefault()!</h3>
+            <pre>&lt;form id="lastnameForm"&gt;
+    &lt;input type="text" id="lastname" placeholder="Etternavn" /&gt;
+    &lt;button type="submit"&gt;Lagre&lt;/button&gt;
+&lt;/form&gt;
+
+document.getElementById("lastnameForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Hindrer at siden laster på nytt!
+    const inputLastname = document.getElementById("lastname").value;
+    console.log(inputLastname);
+});</pre>
+
+            <h3>3. Live-oppdatering ("input") og Nedtrekksliste ("change")</h3>
+            <pre>// Kjører for hvert tastetrykk i input-feltet:
+document.getElementById("birthyearLive").addEventListener("input", function(e) {
+    const val = document.getElementById("birthyearLive").value;
+    document.getElementById("ageLive").innerHTML = 2026 - val;
+});
+// Sjekke om en checkbox er huket av:
+const erValgt = document.getElementById("minCheckbox").checked; // true/false</pre>
+        </div>
+
+        <div class="box full">
+            <h2>15. Tastatur-input (keydown / keyup) & Oppgave-mønster: Lagre fra Input til Liste</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <div>
+                    <h3>Tastatur-events (keydown og keyup)</h3>
+                    <pre>let direction = "";
+const pd = document.getElementById("direction");
+
+// Lytt etter når en tast trykkes NED på hele dokumentet:
+document.addEventListener("keydown", function(event) {
+    // event.key = tegnet ("a", "w", "ArrowUp", "Enter")
+    // event.code = fysisk tastekode ("KeyA", "KeyW", "Space")
+    if (event.key === "a") direction = "left";
+    if (event.key === "w") direction = "up";
+    if (event.key === "s") direction = "down";
+    if (event.key === "d") direction = "right";
+    pd.innerHTML = direction;
+});
+
+// Lytt etter når en tast slippes OPP:
+document.addEventListener("keyup", function(event) {
+    if (event.key === "a" || event.key === "w" || event.key === "s" || event.key === "d") {
+        direction = "";
+        pd.innerHTML = direction;
+    }
+});</pre>
+                </div>
+                <div>
+                    <h3>Komplett mønster: Legg til fra input-felt til array og oppdater HTML</h3>
+                    <pre>&lt;input type="text" id="firstname" placeholder="Fornavn" /&gt;
+&lt;button id="save"&gt;Lagre&lt;/button&gt;
+&lt;ul id="names"&gt;&lt;/ul&gt;
+
+const names = ["Marius", "Trine", "Ole"];
+
+function namePrint() {
+    let html = "";
+    names.map(name =&gt; { html += `&lt;li&gt;${name}&lt;/li&gt;`; });
+    document.getElementById("names").innerHTML = html;
+}
+namePrint(); // Skriv ut start-arrayen når siden lastes
+
+document.getElementById("save").addEventListener("click", function(event) {
+    event.preventDefault();
+    const nyttNavn = document.getElementById("firstname").value.trim();
+    if (nyttNavn !== "") {
+        names.push(nyttNavn); // 1. Legg verdi i arrayen
+        namePrint();          // 2. Kjør utskriftsfunksjon på nytt
+        document.getElementById("firstname").value = ""; // 3. Tøm input-feltet
+    }
+});</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== SIDE 4 ==================== -->
+<div class="page">
+    <div class="page-header">
+        <span>SIDE 4 / 4 — EKSAMENSOPPSKRIFTER, ALGORITMER, CANVAS, TIMERE & SJEKKLISTE</span>
+        <span>Innføring i programmering (JS)</span>
+    </div>
+
+    <div class="grid">
+        <div class="box">
+            <h2>16. Vanlige Algoritmer & Tallbehandling</h2>
+            <h3>1. Summere alle tall i en array (fra forelesning)</h3>
+            <pre>const tall = [1, 5, 66, 7, 42, 333, 54, 7];
+
+function addAll(array) {
+    let sum = 0;
+    array.map(n =&gt; { sum += n; });
+
+    const nump = document.createElement("p");
+    nump.innerHTML = sum;
+    document.body.appendChild(nump);
+    return sum;
+}
+addAll(tall); // 515</pre>
+
+            <h3>2. Summere en egenskap i en array av objekter (f.eks. totalpris)</h3>
+            <pre>let totalSider = 0;
+bokregister.map(bok =&gt; {
+    totalSider += bok.pagecount;
+});</pre>
+
+            <h3>3. Finne største, minste og gjennomsnitt</h3>
+            <pre>const snitt = totalSider / bokregister.length;
+const maks  = Math.max(...tall); // 333
+const min   = Math.min(...tall); // 1
+
+// Finne største verdi manuelt med map/løkke:
+let hoyest = tall[0];
+tall.map(n =&gt; { if (n &gt; hoyest) hoyest = n; });</pre>
+        </div>
+
+        <div class="box">
+            <h2>17. Oppgaver med createElement & Slette-knapp</h2>
+            <h3>1. Sortere array og bygge &lt;ul&gt; med createElement (Oppgave 2)</h3>
+            <pre>const people = ["Marius", "Tore", "Susanne", "Monica", "Arne"];
+
+function printNames(array) {
+    array.sort(); // Sorter alfabetisk A-Å
+    const ul = document.createElement("ul");
+
+    array.map(person =&gt; {
+        const li = document.createElement("li");
+        li.innerHTML = person;
+        ul.appendChild(li); // Legg &lt;li&gt; inn i &lt;ul&gt;
+    });
+    document.body.appendChild(ul); // Legg &lt;ul&gt; på nettsiden
+}
+printNames(people);</pre>
+
+            <h3>2. Slette-knapp på hvert element i en liste</h3>
+            <pre>function renderList() {
+    let html = "";
+    names.map((person, index) =&gt; {
+        html += `&lt;li&gt;${person} &lt;button onclick="deletePerson(${index})"&gt;Slett&lt;/button&gt;&lt;/li&gt;`;
+    });
+    document.getElementById("names").innerHTML = html;
+}
+function deletePerson(index) {
+    names.splice(index, 1); // Slett 1 element på gitt indeks
+    renderList();           // Tegn listen på nytt!
+}</pre>
+        </div>
+
+        <div class="box">
+            <h2>18. Filtrering med Nedtrekksliste (&lt;select&gt;) & Timere</h2>
+            <h3>Filtrere array av objekter når bruker velger i &lt;select&gt;</h3>
+            <pre>&lt;select id="filterSelect"&gt;
+    &lt;option value="alle"&gt;Vis alle&lt;/option&gt;
+    &lt;option value="lang"&gt;Over 400 sider&lt;/option&gt;
+&lt;/select&gt;
+&lt;section id="books"&gt;&lt;/section&gt;
+
+function showBooks(list) {
+    let html = "";
+    list.map(b =&gt; { html += `&lt;article&gt;&lt;h3&gt;${b.title}&lt;/h3&gt;&lt;/article&gt;`; });
+    document.getElementById("books").innerHTML = html;
+}
+showBooks(bokregister); // Vis alle ved start
+
+document.getElementById("filterSelect").addEventListener("change", function(e) {
+    const valg = e.target.value; // eller document.getElementById("filterSelect").value
+    if (valg === "alle") {
+        showBooks(bokregister);
+    } else if (valg === "lang") {
+        const filtrert = bokregister.filter(b =&gt; b.pagecount &gt;= 400);
+        showBooks(filtrert);
+    }
+});</pre>
+
+            <h3>setInterval, setTimeout & LocalStorage</h3>
+            <pre>// Kjør hvert 1000 ms (1 sek):
+const timer = setInterval(() =&gt; { console.log("Tik"); }, 1000);
+clearInterval(timer); // Stopp intervall
+// Kjør én gang etter 2000 ms:
+setTimeout(() =&gt; { console.log("Ferdig"); }, 2000);
+// LocalStorage (lagre/hente array som tekst):
+localStorage.setItem("lagret", JSON.stringify(names));
+const lagret = JSON.parse(localStorage.getItem("lagret"));</pre>
+        </div>
+
+        <div class="box">
+            <h2>19. Canvas 2D — Tegning og Animasjon</h2>
+            <pre>&lt;canvas id="canvas" width="400" height="300"&gt;&lt;/canvas&gt;
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+// 1. Fylt rektangel og kant-rektangel (x, y, bredde, høyde):
+ctx.fillStyle = "blue";
+ctx.fillRect(20, 20, 100, 50);
+ctx.strokeStyle = "black";
+ctx.strokeRect(20, 20, 100, 50);
+
+// 2. Sirkel (x, y, radius, startVinkel, sluttVinkel):
+ctx.beginPath();
+ctx.arc(150, 100, 25, 0, 2 * Math.PI);
+ctx.fillStyle = "red";
+ctx.fill();
+ctx.stroke();
+ctx.closePath();
+
+// 3. Strek fra punkt A til punkt B:
+ctx.beginPath();
+ctx.moveTo(0, 0);
+ctx.lineTo(100, 100);
+ctx.stroke();
+
+// 4. Tekst på canvas:
+ctx.font = "18px Arial";
+ctx.fillText("Score: 10", 10, 20);
+
+// 5. Animasjonsløkke med requestAnimationFrame:
+let x = 10;
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Tøm hele canvas
+    ctx.fillRect(x, 50, 30, 30);
+    x += 2;
+    requestAnimationFrame(animate);
+}
+animate();</pre>
+        </div>
+
+        <div class="box full">
+            <h2>20. Sjekkliste ved Feilsøking på Eksamen (Typiske feller!)</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <ul>
+                    <li><strong><code>"2" + "3" = "23"</code> (Tall fra input er alltid String!):</strong> Verdier hentet med <code>.value</code> er tekst. Skal du plusse, bruk <code>Number(document.getElementById("id").value)</code>!</li>
+                    <li><strong>Siden laster på nytt og tømmer alt ved skjemainnsending:</strong> Du mangler <code>event.preventDefault()</code> inne i <code>addEventListener("submit", function(event) { ... })</code>.</li>
+                    <li><strong>Feilmelding <code>Cannot set properties of null (setting 'innerHTML')</code>:</strong> ID-en i <code>document.getElementById("...")</code> matcher ikke <code>id="..."</code> i HTML (sjekk store/små bokstaver!), eller <code>&lt;script&gt;</code> ligger før HTML-elementet.</li>
+                </ul>
+                <ul>
+                    <li><strong>Kun siste element vises i listen:</strong> Du har skrevet <code>innerHTML = ...</code> i stedet for <code>innerHTML += ...</code> inne i <code>.map()</code> / løkka.</li>
+                    <li><strong>Listen dupliserer seg hver gang man legger til noe nytt:</strong> Tøm HTML-elementet eller bruk <code>let html = ""</code> i starten av utskriftsfunksjonen før <code>.map()</code>.</li>
+                    <li><strong><code>=</code> vs <code>===</code>:</strong> Ett likhetstegn (<code>=</code>) setter en ny verdi. Tre likhetstegn (<code>===</code>) sammenligner to verdier i en <code>if</code>-test.</li>
+                    <li><strong>Tallsortering blir feil (100 kommer før 20):</strong> Husk sammenligningsfunksjon: <code>tall.sort((a, b) =&gt; a - b)</code>.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
